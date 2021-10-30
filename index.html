@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Duet</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+  <div id="duet" class="container" style="padding-top: 32px;">
+    <button type="button" class="btn btn-primary" v-bind:class="{ disabled: audioTracks.length == 0 && !playing }" v-on:click="play">{{ playing ? 'Stop' : 'Play' }}</button>
+
+    <div style="margin-top: 16px;">
+      <div class="card" style="width: auto; margin-bottom: 16px;" v-for="track in audioTracks">
+        <div class="card-body" style="overflow-x: scroll;">
+          <h5 class="card-title">{{ track.file.name }}</h5>
+          <p class="card-text">{{ track.file.type }}</p>
+          <audio v-bind:id="`track${track.idx}`" v-bind:src="track.src"></audio>
+          <table class="table" v-bind:id="`track${track.idx}`">
+            <thead>
+              <tr>
+                <th scope="col">Output</th>
+                <th scope="col">deviceId</th>
+                <th scope="col">groupId</th>
+                <!--<th scope="col">kind</th>
+                <th scope="col">label</th>-->
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="device in audioOutputs">
+                <th><small><input type="radio" v-bind:id="device.deviceId" v-bind:track="track.idx" v-on:click="useAudioOutput" v-bind:checked="track.audioOutputDeviceId === device.deviceId"> Use</small></th>
+                <td><small>{{ device.deviceId }}</small></td>
+                <td><small>{{ device.groupId }}</small></td>
+                <!--<td>{{ device.kind }}</td>
+                <td>{{ device.label }}</td>-->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <input type="file" id="audioTrackFile" />
+    <button type="button" class="btn btn-primary" v-bind:class="{ disabled: document.getElementById('audioTrackFile').files.length == 0 || playing }" v-on:click="addAudioTrack">+ Add track</button>
+  </div>
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script type="text/javascript" src="./duet.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "duet",
+  "version": "1.0.0",
+  "description": "Synchronized playback of multiple tracks to multiple audio devices",
+  "main": "app.js",
+  "scripts": {
+    "test": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tma02/duet.git"
+  },
+  "author": "Tianyi Ma <tn.ma@outlook.com>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/tma02/duet/issues"
+  },
+  "homepage": "https://github.com/tma02/duet#readme",
+  "devDependencies": {
+    "electron": "^3.0.10"
+  }
+}
